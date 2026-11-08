@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">PokeApp</string>
-    <string name="txt_fragment_name">Fragment A</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="txt_fragment_a_name">Fragment A</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_busca_fragment">Hello busca fragment</string>
+    <string name="hello_lista_poke_fragment">Hello lista poke fragment</string>
+    <string name="hello_favoritos_fragment">Hello favoritos fragment</string>
+    <string name="hello_detalhes_poke_fragment">Hello detalhes poke fragment</string>
 </resources>

@@ -4,29 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputBinding
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.example.pokeapp.databinding.FragmentABinding
 
-class MyFragment : Fragment() {
-    private lateinit var binding: InputBinding
+class MyFragment : Fragment(R.layout.fragment_a) {
+
+    private var _binding: FragmentABinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
+                              savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        val fragView = inflater.inflate(R.layout.fragment_a, container, false)
-        return fragView
-
+        _binding = FragmentABinding.inflate(inflater, container, false)
+        binding.textFragmentA.setText(R.string.txt_fragment_a_name)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.textFragmentA.setOnClickListener({
-            findNavController().navigate(R.id.action_myFragment_to_blankFragment)
-        })
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-
 }

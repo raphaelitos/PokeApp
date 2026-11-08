@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_mng"
-    app:startDestination="@id/myFragment">
+    app:startDestination="@id/buscaFragment">
 
     <fragment
         android:id="@+id/myFragment"
@@ -22,6 +22,45 @@
         <action
             android:id="@+id/action_blankFragment_to_myFragment"
             app:destination="@id/myFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buscaFragment"
+        android:name="com.example.pokeapp.ui.fragments.BuscaFragment"
+        android:label="fragment_busca"
+        tools:layout="@layout/fragment_busca" >
+        <action
+            android:id="@+id/action_buscaFragment_to_listaPokemonFragment"
+            app:destination="@id/listaPokemonFragment" />
+        <action
+            android:id="@+id/action_buscaFragment_to_favoritosFragment"
+            app:destination="@id/favoritosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesPokemonFragment"
+        android:name="com.example.pokeapp.ui.fragments.DetalhesPokemonFragment"
+        android:label="fragment_detalhes_pokemon"
+        tools:layout="@layout/fragment_detalhes_pokemon" >
+        <action
+            android:id="@+id/action_detalhesPokemonFragment_to_listaPokemonFragment"
+            app:destination="@id/listaPokemonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaPokemonFragment"
+        android:name="com.example.pokeapp.ui.fragments.ListaPokemonFragment"
+        android:label="fragment_lista_pokemon"
+        tools:layout="@layout/fragment_lista_pokemon" >
+        <action
+            android:id="@+id/action_listaPokemonFragment_to_detalhesPokemonFragment"
+            app:destination="@id/detalhesPokemonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="com.example.pokeapp.ui.fragments.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" >
+        <action
+            android:id="@+id/action_favoritosFragment_to_buscaFragment"
+            app:destination="@id/buscaFragment" />
     </fragment>
 
 </navigation>
