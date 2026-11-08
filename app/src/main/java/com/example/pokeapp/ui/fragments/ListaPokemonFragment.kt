@@ -46,7 +46,10 @@ class ListaPokemonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.textFragmentListaPoke.setOnClickListener({
-            findNavController().navigate(R.id.action_listaPokemonFragment_to_detalhesPokemonFragment)
+            val action = ListaPokemonFragmentDirections.actionListaPokemonFragmentToDetalhesPokemonFragment()
+            findNavController().navigate(action)
+
+            //findNavController().navigate(R.id.action_listaPokemonFragment_to_detalhesPokemonFragment)
         })
 
     }
