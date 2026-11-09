@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ListaPokemonFragment">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/textFragmentListaPoke"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_lista_poke_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_lista"
+        android:textSize="24sp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnPikachu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pokemon_pikachu" />
+
+    <Button
+        android:id="@+id/btnCharmander"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pokemon_charmander" />
+
+    <Button
+        android:id="@+id/btnVoltarLista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/botao_voltar" />
+
+</LinearLayout>

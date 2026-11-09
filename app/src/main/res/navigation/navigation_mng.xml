@@ -6,24 +6,6 @@
     app:startDestination="@id/buscaFragment">
 
     <fragment
-        android:id="@+id/myFragment"
-        tools:layout="@layout/fragment_a"
-        android:name="com.example.pokeapp.MyFragment"
-        android:label="AFragment" >
-        <action
-            android:id="@+id/action_myFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/blankFragment"
-        tools:layout="@layout/fragment_blank"
-        android:name="com.example.pokeapp.BlankFragment"
-        android:label="BFragment" >
-        <action
-            android:id="@+id/action_blankFragment_to_myFragment"
-            app:destination="@id/myFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/buscaFragment"
         android:name="com.example.pokeapp.ui.fragments.BuscaFragment"
         android:label="fragment_busca"
@@ -34,6 +16,9 @@
         <action
             android:id="@+id/action_buscaFragment_to_favoritosFragment"
             app:destination="@id/favoritosFragment" />
+        <action
+            android:id="@+id/action_buscaFragment_to_detalhesPokemonFragment"
+            app:destination="@id/detalhesPokemonFragment" />
     </fragment>
     <fragment
         android:id="@+id/detalhesPokemonFragment"
@@ -45,8 +30,7 @@
             app:destination="@id/listaPokemonFragment" />
         <argument
             android:name="pokemonKey"
-            app:argType="string"
-            android:defaultValue='"pikachu"' />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/listaPokemonFragment"
