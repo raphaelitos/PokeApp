@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.FragmentDetalhesPokemonBinding
 import com.example.pokeapp.databinding.FragmentListaPokemonBinding
+import com.example.pokeapp.ui.viewModel.DetalhesPokemonViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +30,8 @@ class DetalhesPokemonFragment : Fragment(R.layout.fragment_detalhes_pokemon) {
 
     private var _binding: FragmentDetalhesPokemonBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: DetalhesPokemonViewModel by viewModels()
     private val args: DetalhesPokemonFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +52,7 @@ class DetalhesPokemonFragment : Fragment(R.layout.fragment_detalhes_pokemon) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Apresenta o identificador recebido.
-        binding.tvNomeSelecionado.text = getString(
-            R.string.detalhe_pokemon,
-            args.pokemonKey
-        )
+        viewModel.buscarPokemon(args.pokemonKey)
 
         binding.btnVoltarDetalhes.setOnClickListener {
             findNavController().popBackStack()
