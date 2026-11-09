@@ -15,39 +15,52 @@ class PokemonRepository {
         callback: (PokemonEntity?, String?) -> Unit
     ) {
 
-        service.getInfoPokemon(pokemon).enqueue(object : Callback<PokemonEntity> {
+        service.getInfoPokemon(pokemon).enqueue(
+            object : Callback<PokemonEntity> {
 
-            override fun onResponse(
-                call: Call<PokemonEntity>,
-                response: Response<PokemonEntity>
-            ) {
+                override fun onResponse(
+                    call: Call<PokemonEntity>,
+                    response: Response<PokemonEntity>
+                ) {
 
-                val poke = response.body()
+                    val poke = response.body()
 
-                when {
-                    !response.isSuccessful ->
-                        callback(null, "Erro HTTP: ${response.code()}")
+                    when {
+                        response.code() == 404 -> {
+                            callback(null, "Pokémon não encontrado.")
+                        }
 
-                    poke == null ->
-                        callback(null, "Resposta vazia da API.")
+                        !response.isSuccessful -> {
+                            callback(
+                                null,
+                                "Erro HTTP: ${response.code()}"
+                            )
+                        }
 
-                    poke.erro ->
-                        callback(null, "Pokemon não encontrado.")
+                        poke == null -> {
+                            callback(null, "Resposta vazia da API.")
+                        }
 
-                    poke.pokemon.isNullOrBlank()->
-                        callback(null, "Resposta inválida da API.")
+                        poke.id <= 0 || poke.name.isBlank() -> {
+                            callback(null, "Resposta inválida da API.")
+                        }
 
-                    else ->
-                        callback(poke, null)
+                        else -> {
+                            callback(poke, null)
+                        }
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<PokemonEntity>,
+                    t: Throwable
+                ) {
+                    callback(
+                        null,
+                        "Falha na conexão ou na interpretação da resposta."
+                    )
                 }
             }
-
-            override fun onFailure(
-                call: Call<PokemonEntity>,
-                t: Throwable
-            ) {
-                callback(null, "Erro de conexão.")
-            }
-        })
+        )
     }
 }

@@ -3,55 +3,33 @@ package com.example.pokeapp.repository.api.model
 import com.google.gson.annotations.SerializedName
 
 data class PokemonEntity(
-    @SerializedName("id")
-    val id: Int,
-
-    @SerializedName("name")
-    val name: String,
-
-    @SerializedName("height")
-    val height: Int,
-
-    @SerializedName("weight")
-    val weight: Int,
-
-    @SerializedName("types")
-    val types: List<PokemonTypeEntry>,
-
-    @SerializedName("stats")
-    val stats: List<PokemonStatEntry>,
-
-    @SerializedName("sprites")
-    val sprites: PokemonSprites
+    val id: Int = 0,
+    val name: String = "",
+    val height: Int = 0,
+    val weight: Int = 0,
+    val types: List<PokemonTypeEntry> = emptyList(),
+    val stats: List<PokemonStatEntry> = emptyList(),
+    val sprites: PokemonSprites = PokemonSprites()
 )
 
 data class PokemonTypeEntry(
-    @SerializedName("slot")
-    val slot: Int,
-
-    @SerializedName("type")
-    val type: PokemonTypeInfo
-)
-
-data class PokemonTypeInfo(
-    @SerializedName("name")
-    val name: String
+    val slot: Int = 0,
+    val type: PokemonNamedResource = PokemonNamedResource()
 )
 
 data class PokemonStatEntry(
     @SerializedName("base_stat")
-    val baseStat: Int,
+    val baseStat: Int = 0,
 
-    @SerializedName("stat")
-    val stat: PokemonStatInfo
+    val stat: PokemonNamedResource = PokemonNamedResource()
 )
 
-data class PokemonStatInfo(
-    @SerializedName("name")
-    val name: String
+data class PokemonNamedResource(
+    val name: String = "",
+    val url: String = ""
 )
 
 data class PokemonSprites(
     @SerializedName("front_default")
-    val frontDefault: String?
+    val frontDefault: String? = null
 )
