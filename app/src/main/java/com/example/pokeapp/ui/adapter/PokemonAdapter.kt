@@ -2,15 +2,14 @@ package com.example.pokeapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.example.pokeapp.databinding.ItemPokemonBinding
 import com.example.pokeapp.repository.api.model.PokemonListItem
 
 class PokemonAdapter(
     private val onPokemonClick: (PokemonListItem) -> Unit
-) : RecyclerView.Adapter<PokemonViewHolder>() {
-
-    private var pokemons: List<PokemonListItem> = emptyList()
+) : ListAdapter<PokemonListItem, PokemonViewHolder>(Comparador) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val binding = ItemPokemonBinding.inflate(
@@ -20,13 +19,16 @@ class PokemonAdapter(
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.bind(pokemons[position], onPokemonClick)
+        holder.bind(getItem(position), onPokemonClick)
     }
 
-    override fun getItemCount(): Int = pokemons.size
+    /** [onConcluido] é chamado depois que a lista nova foi aplicada ao RecyclerView. */
+    fun atualizarItens(novosItens: List<PokemonListItem>, onConcluido: () -> Unit = {}) {
+        submitList(novosItens, onConcluido)
+    }
 
-    fun atualizarItens(novosItens: List<PokemonListItem>) {
-        pokemons = novosItens
-        notifyDataSetChanged()
+    private object Comparador : DiffUtil.ItemCallback<PokemonListItem>() {
+        override fun areItemsTheSame(a: PokemonListItem, b: PokemonListItem) = a.name == b.name
+        override fun areContentsTheSame(a: PokemonListItem, b: PokemonListItem) = a == b
     }
 }

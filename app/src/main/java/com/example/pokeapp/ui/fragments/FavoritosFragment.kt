@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.FragmentFavoritosBinding
-import com.example.pokeapp.repository.api.model.PokemonListItem
-import com.example.pokeapp.ui.adapter.PokemonAdapter
+import com.example.pokeapp.ui.adapter.FavoritosAdapter
 import com.example.pokeapp.ui.viewModel.FavoritosViewModel
 
 class FavoritosFragment : Fragment() {
@@ -32,30 +33,27 @@ class FavoritosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PokemonAdapter { pokemon ->
-            val args = Bundle().apply {
-                putString("pokemonKey", pokemon.name)
-            }
-            findNavController().navigate(R.id.detalhesPokemonFragment, args)
-        }
+        val adapter = FavoritosAdapter(
+            onAbrir = { favorito ->
+                val args = Bundle().apply { putString("pokemonKey", favorito.name) }
+                findNavController().navigate(R.id.detalhesPokemonFragment, args)
+            },
+            onRemover = { favorito -> viewModel.removerFavorito(favorito.id) }
+        )
 
-        binding.recyclerFavoritos.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerFavoritos.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerFavoritos.adapter = adapter
 
         viewModel.favoritos.observe(viewLifecycleOwner) { favoritos ->
-            val itens = favoritos.map { favorito ->
-                PokemonListItem(
-                    name = favorito.name,
-                    url = "https://pokeapi.co/api/v2/pokemon/${favorito.id}/"
-                )
-            }
-            adapter.atualizarItens(itens)
-            binding.txtFavoritosVazio.visibility =
-                if (favoritos.isEmpty()) View.VISIBLE else View.GONE
+            adapter.submitList(favoritos)
+            binding.layoutFavoritosVazio.isVisible = favoritos.isEmpty()
         }
 
-        binding.btnVoltarFavoritos.setOnClickListener {
-            findNavController().popBackStack()
+        viewModel.erro.observe(viewLifecycleOwner) { mensagem ->
+            if (mensagem != null) {
+                Toast.makeText(requireContext(), mensagem, Toast.LENGTH_SHORT).show()
+                viewModel.limparErro()
+            }
         }
     }
 
