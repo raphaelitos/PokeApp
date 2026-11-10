@@ -2,9 +2,41 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="poke_ink">#263238</color>
-    <color name="poke_card">#F1F5F9</color>
+
+    <!-- Marca (iguais nos temas claro e escuro) -->
     <color name="poke_red">#E63C41</color>
-    <color name="poke_blue_dark">#1C2B3A</color>
     <color name="poke_splash_background">#F7FAFC</color>
+
+    <!-- Tokens do tema claro (sobrescritos em values-night) -->
+    <color name="poke_background">#F7FAFC</color>
+    <color name="poke_card">#EEF2F6</color>
+    <color name="poke_ink">#263238</color>
+    <color name="poke_ink_muted">#5F6B76</color>
+    <color name="poke_outline">#D5DDE5</color>
+    <color name="poke_primary">#E63C41</color>
+    <color name="poke_on_primary">#FFFFFF</color>
+    <color name="poke_primary_container">#FFDAD8</color>
+    <color name="poke_on_primary_container">#410004</color>
+    <color name="poke_secondary">#1C2B3A</color>
+    <color name="poke_on_secondary">#FFFFFF</color>
+
+    <!-- Cores por tipo de Pokémon -->
+    <color name="poke_type_normal">#8A8A59</color>
+    <color name="poke_type_fire">#E8722A</color>
+    <color name="poke_type_water">#4F7FE8</color>
+    <color name="poke_type_grass">#4E9E32</color>
+    <color name="poke_type_electric">#C99A0A</color>
+    <color name="poke_type_ice">#3FA9A1</color>
+    <color name="poke_type_fighting">#C22E28</color>
+    <color name="poke_type_poison">#A33EA1</color>
+    <color name="poke_type_ground">#A98240</color>
+    <color name="poke_type_flying">#7C62D0</color>
+    <color name="poke_type_psychic">#E8467A</color>
+    <color name="poke_type_bug">#8A9A16</color>
+    <color name="poke_type_rock">#9A8420</color>
+    <color name="poke_type_ghost">#6A5090</color>
+    <color name="poke_type_dragon">#6F35FC</color>
+    <color name="poke_type_dark">#5A4A40</color>
+    <color name="poke_type_steel">#7A7A9A</color>
+    <color name="poke_type_fairy">#CF6FA0</color>
 </resources>

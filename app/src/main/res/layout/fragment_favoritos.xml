@@ -1,41 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="@string/titulo_favoritos"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerFavoritos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="12dp"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_favorito" />
+    </LinearLayout>
+
+    <!-- Estado vazio -->
+    <LinearLayout
+        android:id="@+id/layoutFavoritosVazio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/titulo_favoritos"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtFavoritosVazio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/favoritos_vazio"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFavoritos"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="12dp"
-        android:clipToPadding="false"
-        tools:listitem="@layout/item_pokemon" />
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_favorite_border"
+            app:tint="?attr/colorOnSurfaceVariant"
+            xmlns:app="http://schemas.android.com/apk/res-auto" />
 
-    <Button
-        android:id="@+id/btnVoltarFavoritos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_voltar" />
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/favoritos_vazio"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/favoritos_vazio_dica"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant" />
+    </LinearLayout>
+</FrameLayout>

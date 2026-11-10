@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="poke_background">#121A22</color>
+    <color name="poke_card">#1E2A35</color>
+    <color name="poke_ink">#E6EDF3</color>
+    <color name="poke_ink_muted">#9AA7B3</color>
+    <color name="poke_outline">#34424F</color>
+    <color name="poke_primary">#FF6B6F</color>
+    <color name="poke_on_primary">#3A0007</color>
+    <color name="poke_primary_container">#5C1217</color>
+    <color name="poke_on_primary_container">#FFDAD8</color>
+    <color name="poke_secondary">#A9C4DC</color>
+    <color name="poke_on_secondary">#10202E</color>
+</resources>

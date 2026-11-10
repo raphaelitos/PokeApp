@@ -1,50 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
         android:text="@string/titulo_lista"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtEstadoLista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:visibility="gone"
-        tools:text="Carregando Pokémon..." />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerPokemon"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="12dp"
-        android:clipToPadding="false"
-        android:padding="4dp"
-        tools:listitem="@layout/item_pokemon" />
+        android:layout_weight="1">
 
-    <Button
-        android:id="@+id/btnCarregarMais"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_carregar_mais" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="12dp"
+            android:paddingBottom="12dp"
+            tools:itemCount="9"
+            tools:listitem="@layout/item_pokemon"
+            tools:spanCount="3" />
 
-    <Button
-        android:id="@+id/btnVoltarLista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/botao_voltar" />
+        <!-- Primeira carga da lista -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressInicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
 
+        <!-- Carga das páginas seguintes (scroll infinito) -->
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressPagina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <!-- Erro ou lista vazia. Fica no centro sem itens e no rodapé com itens. -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEstado"
+            style="@style/Widget.PokeApp.Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtEstadoLista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    tools:text="Falha na consulta do Pokémon." />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTentarNovamente"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/botao_tentar_novamente" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 </LinearLayout>

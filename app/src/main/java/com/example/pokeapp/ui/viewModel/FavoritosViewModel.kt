@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.pokeapp.R
 import com.example.pokeapp.repository.api.model.PokemonEntity
 import com.example.pokeapp.repository.local.PokemonFavorito
 import com.example.pokeapp.repository.local.PokemonFavoritosRepository
@@ -35,10 +36,23 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
                     )
                 }
             } catch (e: Exception) {
-                _erro.value = "Nao foi possivel atualizar os favoritos."
+                _erro.value = mensagemErroAtualizacao()
             }
         }
     }
+
+    fun removerFavorito(id: Int) {
+        viewModelScope.launch {
+            try {
+                repository.remover(id)
+            } catch (e: Exception) {
+                _erro.value = mensagemErroAtualizacao()
+            }
+        }
+    }
+
+    private fun mensagemErroAtualizacao(): String =
+        getApplication<Application>().getString(R.string.erro_atualizar_favoritos)
 
     fun limparErro() {
         _erro.value = null

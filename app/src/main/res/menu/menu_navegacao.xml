@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Os ids precisam ser iguais aos ids dos destinos em navigation_mng.xml. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/buscaFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/nav_buscar" />
+    <item
+        android:id="@+id/listaPokemonFragment"
+        android:icon="@drawable/ic_grid"
+        android:title="@string/nav_lista" />
+    <item
+        android:id="@+id/favoritosFragment"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/nav_favoritos" />
+</menu>

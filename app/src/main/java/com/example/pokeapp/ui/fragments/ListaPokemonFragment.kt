@@ -1,13 +1,17 @@
 package com.example.pokeapp.ui.fragments
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.FragmentListaPokemonBinding
 import com.example.pokeapp.ui.adapter.PokemonAdapter
@@ -19,6 +23,7 @@ class ListaPokemonFragment : Fragment() {
     private var _binding: FragmentListaPokemonBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ListaPokemonViewModel by viewModels()
+    private lateinit var adapter: PokemonAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,25 +37,30 @@ class ListaPokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PokemonAdapter { pokemon ->
+        adapter = PokemonAdapter { pokemon ->
             val action = ListaPokemonFragmentDirections
                 .actionListaPokemonFragmentToDetalhesPokemonFragment(pokemon.name)
             findNavController().navigate(action)
         }
 
-        binding.recyclerPokemon.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerPokemon.layoutManager = GridLayoutManager(requireContext(), COLUNAS)
         binding.recyclerPokemon.adapter = adapter
 
+        // Scroll infinito: ao se aproximar do fim, pede a próxima página à API.
+        binding.recyclerPokemon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) carregarSeProximoDoFim()
+            }
+        })
+
         viewModel.estado.observe(viewLifecycleOwner) { estado ->
-            adapter.atualizarItens(estado.itens)
+            // Depois de aplicar a lista, verifica se a tela ainda não está preenchida.
+            adapter.atualizarItens(estado.itens) { _binding?.let { carregarSeProximoDoFim() } }
             apresentarEstado(estado)
         }
 
-        binding.btnCarregarMais.setOnClickListener {
+        binding.btnTentarNovamente.setOnClickListener {
             viewModel.carregarProximaPagina()
-        }
-        binding.btnVoltarLista.setOnClickListener {
-            findNavController().popBackStack()
         }
 
         val atual = viewModel.estado.value
@@ -59,23 +69,50 @@ class ListaPokemonFragment : Fragment() {
         }
     }
 
+    private fun carregarSeProximoDoFim() {
+        val estado = viewModel.estado.value ?: return
+        // Em caso de erro, o usuário precisa tocar em "Tentar novamente" (evita repetir a falha).
+        if (estado.erro != null || estado.carregando || !estado.possuiMais) return
+
+        val layoutManager = binding.recyclerPokemon.layoutManager as GridLayoutManager
+        val ultimoVisivel = layoutManager.findLastVisibleItemPosition()
+        if (ultimoVisivel >= adapter.itemCount - ITENS_RESTANTES_PARA_CARREGAR) {
+            viewModel.carregarProximaPagina()
+        }
+    }
+
     private fun apresentarEstado(estado: EstadoListaPokemon) {
-        binding.btnCarregarMais.visibility = if (estado.possuiMais) View.VISIBLE else View.GONE
-        binding.btnCarregarMais.isEnabled = !estado.carregando
+        val semItens = estado.itens.isEmpty()
+
+        binding.progressInicial.isVisible = estado.carregando && semItens
+        binding.progressPagina.isVisible = estado.carregando && !semItens
 
         val mensagem = when {
-            estado.carregando -> getString(R.string.mensagem_carregando_lista)
             estado.erro != null -> estado.erro
-            estado.itens.isEmpty() && !estado.possuiMais -> getString(R.string.mensagem_lista_vazia)
+            semItens && !estado.carregando && !estado.possuiMais ->
+                getString(R.string.mensagem_lista_vazia)
             else -> null
         }
+
         binding.txtEstadoLista.text = mensagem ?: ""
-        binding.txtEstadoLista.visibility = if (mensagem == null) View.GONE else View.VISIBLE
+        binding.btnTentarNovamente.isVisible = estado.erro != null
+        binding.cardEstado.isVisible = mensagem != null
+
+        // Sem itens o aviso fica no centro; com itens, no rodapé da lista.
+        val params = binding.cardEstado.layoutParams as FrameLayout.LayoutParams
+        params.gravity =
+            if (semItens) Gravity.CENTER else Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+        binding.cardEstado.layoutParams = params
     }
 
     override fun onDestroyView() {
         binding.recyclerPokemon.adapter = null
         _binding = null
         super.onDestroyView()
+    }
+
+    private companion object {
+        const val COLUNAS = 3
+        const val ITENS_RESTANTES_PARA_CARREGAR = 6
     }
 }

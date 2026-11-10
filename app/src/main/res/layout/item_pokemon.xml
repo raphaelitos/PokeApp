@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.PokeApp.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="@color/poke_card"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true">
 
-    <ImageView
-        android:id="@+id/imgPokemon"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:contentDescription="@string/descricao_imagem_pokemon"
-        android:scaleType="fitCenter"
-        tools:src="@android:drawable/ic_menu_gallery" />
-
-    <TextView
-        android:id="@+id/txtNomePokemon"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textColor="@color/poke_ink"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="Pikachu" />
-</LinearLayout>
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txtNumeroPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:text="#025" />
+
+        <ImageView
+            android:id="@+id/imgPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            tools:src="@android:drawable/ic_menu_gallery" />
+
+        <TextView
+            android:id="@+id/txtNomePokemon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            tools:text="Pikachu" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
