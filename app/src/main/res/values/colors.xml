@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="poke_ink">#263238</color>
     <color name="poke_card">#F1F5F9</color>
+    <color name="poke_red">#E63C41</color>
+    <color name="poke_blue_dark">#1C2B3A</color>
+    <color name="poke_splash_background">#F7FAFC</color>
 </resources>

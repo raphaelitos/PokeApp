@@ -28,4 +28,7 @@
     <string name="mensagem_carregando_lista">Carregando Pokémon...</string>
     <string name="mensagem_carregando_detalhes">Carregando detalhes...</string>
     <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
+
+    <string name="adicionar_favorito">&#9825; Adicionar aos favoritos</string>
+    <string name="remover_favorito">&#9829; Remover dos favoritos</string>
 </resources>

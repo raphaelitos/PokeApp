@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.legacy.kapt)
 }
 
 android {
@@ -57,4 +58,9 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("androidx.room:room-runtime:2.8.5")
+    kapt("androidx.room:room-compiler:2.8.5")
+    implementation("androidx.core:core-splashscreen:1.2.0")
+
 }

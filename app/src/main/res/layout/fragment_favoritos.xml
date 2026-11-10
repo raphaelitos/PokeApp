@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:padding="12dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/titulo_favoritos"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtFavoritosVazio"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/favoritos_vazio" />
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/favoritos_vazio"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_pokemon" />
 
     <Button
         android:id="@+id/btnVoltarFavoritos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/botao_voltar" />
-
 </LinearLayout>

@@ -1,32 +1,30 @@
 package com.example.pokeapp.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.FragmentFavoritosBinding
-import com.example.pokeapp.databinding.FragmentListaPokemonBinding
+import com.example.pokeapp.repository.api.model.PokemonListItem
+import com.example.pokeapp.ui.adapter.PokemonAdapter
+import com.example.pokeapp.ui.viewModel.FavoritosViewModel
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoritosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoritosFragment : Fragment() {
+
     private var _binding: FragmentFavoritosBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: FavoritosViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        super.onCreateView(inflater, container, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentFavoritosBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,13 +32,36 @@ class FavoritosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = PokemonAdapter { pokemon ->
+            val args = Bundle().apply {
+                putString("pokemonKey", pokemon.name)
+            }
+            findNavController().navigate(R.id.detalhesPokemonFragment, args)
+        }
+
+        binding.recyclerFavoritos.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerFavoritos.adapter = adapter
+
+        viewModel.favoritos.observe(viewLifecycleOwner) { favoritos ->
+            val itens = favoritos.map { favorito ->
+                PokemonListItem(
+                    name = favorito.name,
+                    url = "https://pokeapi.co/api/v2/pokemon/${favorito.id}/"
+                )
+            }
+            adapter.atualizarItens(itens)
+            binding.txtFavoritosVazio.visibility =
+                if (favoritos.isEmpty()) View.VISIBLE else View.GONE
+        }
+
         binding.btnVoltarFavoritos.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        binding.recyclerFavoritos.adapter = null
         _binding = null
+        super.onDestroyView()
     }
 }
