@@ -1,34 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PokeApp</string>
-    <string name="txt_fragment_a_name">Fragment A</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_busca_fragment">Hello busca fragment</string>
-    <string name="hello_lista_poke_fragment">Hello lista poke fragment</string>
-    <string name="hello_favoritos_fragment">Hello favoritos fragment</string>
-    <string name="hello_detalhes_poke_fragment">Hello detalhes poke fragment</string>
 
-    <string name="titulo_busca">Buscar Pokémon</string>
-    <string name="titulo_lista">Lista de Pokémon</string>
-    <string name="titulo_favoritos">Meus favoritos</string>
-    <string name="titulo_detalhes">Detalhes do Pokémon</string>
-    <string name="hint_nome_pokemon">Nome do Pokémon</string>
-    <string name="botao_ver_detalhes">Ver detalhes</string>
-    <string name="botao_lista">Lista de Pokémon</string>
-    <string name="botao_favoritos">Favoritos</string>
+    <!-- Navegação -->
+    <string name="nav_buscar">Buscar</string>
+    <string name="nav_lista">Lista</string>
+    <string name="nav_favoritos">Favoritos</string>
+
+    <!-- Busca -->
+    <string name="subtitulo_busca">Encontre qualquer Pokémon pelo nome ou número</string>
+    <string name="hint_nome_pokemon">Nome ou número do Pokémon</string>
+    <string name="botao_buscar">Buscar</string>
     <string name="erro_nome_vazio">Informe o nome de um Pokémon</string>
+    <string name="titulo_sugestoes">Sugestões</string>
     <string name="pokemon_pikachu">Pikachu</string>
     <string name="pokemon_charmander">Charmander</string>
-    <string name="favoritos_vazio">Nenhum Pokémon favorito por enquanto.</string>
-    <string name="detalhe_pokemon">Pokémon selecionado: %1$s</string>
-    <string name="botao_voltar">Voltar</string>
-    <string name="botao_carregar_mais">Carregar mais Pokémon</string>
-    <string name="descricao_imagem_pokemon">Imagem do Pokémon</string>
-    <string name="descricao_imagem_pokemon_nome">Imagem do Pokémon %1$s</string>
-    <string name="mensagem_carregando_lista">Carregando Pokémon...</string>
-    <string name="mensagem_carregando_detalhes">Carregando detalhes...</string>
-    <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
+    <string name="pokemon_bulbasaur">Bulbasaur</string>
+    <string name="descricao_logo">Logotipo do PokeApp</string>
 
-    <string name="adicionar_favorito">&#9825; Adicionar aos favoritos</string>
-    <string name="remover_favorito">&#9829; Remover dos favoritos</string>
+    <!-- Lista -->
+    <string name="titulo_lista">Lista de Pokémon</string>
+    <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
+    <string name="botao_tentar_novamente">Tentar novamente</string>
+
+    <!-- Favoritos -->
+    <string name="titulo_favoritos">Meus favoritos</string>
+    <string name="favoritos_vazio">Nenhum Pokémon favorito por enquanto.</string>
+    <string name="favoritos_vazio_dica">Toque no coração nos detalhes de um Pokémon para salvá-lo aqui.</string>
+    <string name="erro_atualizar_favoritos">Não foi possível atualizar os favoritos.</string>
+
+    <!-- Detalhes -->
+    <string name="titulo_estatisticas">Estatísticas base</string>
+    <string name="rotulo_altura">Altura</string>
+    <string name="rotulo_peso">Peso</string>
+    <string name="valor_altura">%1$.1f m</string>
+    <string name="valor_peso">%1$.1f kg</string>
+    <string name="botao_voltar">Voltar</string>
+    <string name="adicionar_favorito">Adicionar aos favoritos</string>
+    <string name="remover_favorito">Remover dos favoritos</string>
+
+    <!-- Itens e imagens -->
+    <string name="numero_pokemon">#%1$03d</string>
+    <string name="descricao_imagem_pokemon_nome">Imagem do Pokémon %1$s</string>
+
+    <!-- Tipos -->
+    <string name="tipo_normal">Normal</string>
+    <string name="tipo_fire">Fogo</string>
+    <string name="tipo_water">Água</string>
+    <string name="tipo_grass">Planta</string>
+    <string name="tipo_electric">Elétrico</string>
+    <string name="tipo_ice">Gelo</string>
+    <string name="tipo_fighting">Lutador</string>
+    <string name="tipo_poison">Veneno</string>
+    <string name="tipo_ground">Terra</string>
+    <string name="tipo_flying">Voador</string>
+    <string name="tipo_psychic">Psíquico</string>
+    <string name="tipo_bug">Inseto</string>
+    <string name="tipo_rock">Pedra</string>
+    <string name="tipo_ghost">Fantasma</string>
+    <string name="tipo_dragon">Dragão</string>
+    <string name="tipo_dark">Sombrio</string>
+    <string name="tipo_steel">Aço</string>
+    <string name="tipo_fairy">Fada</string>
+
+    <!-- Estatísticas -->
+    <string name="stat_hp">PS</string>
+    <string name="stat_attack">Ataque</string>
+    <string name="stat_defense">Defesa</string>
+    <string name="stat_special_attack">Atq. Esp.</string>
+    <string name="stat_special_defense">Def. Esp.</string>
+    <string name="stat_speed">Velocidade</string>
 </resources>

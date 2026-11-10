@@ -1,9 +1,38 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema base. As cores vêm de colors.xml e se adaptam ao modo escuro via values-night/colors.xml. -->
     <style name="Base.Theme.PokeApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/poke_primary</item>
+        <item name="colorOnPrimary">@color/poke_on_primary</item>
+        <item name="colorPrimaryContainer">@color/poke_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/poke_on_primary_container</item>
+        <item name="colorSecondary">@color/poke_secondary</item>
+        <item name="colorOnSecondary">@color/poke_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/poke_primary_container</item>
+        <item name="colorOnSecondaryContainer">@color/poke_on_primary_container</item>
+        <item name="colorSurface">@color/poke_background</item>
+        <item name="colorOnSurface">@color/poke_ink</item>
+        <item name="colorSurfaceVariant">@color/poke_card</item>
+        <item name="colorOnSurfaceVariant">@color/poke_ink_muted</item>
+        <item name="colorOutline">@color/poke_outline</item>
+        <item name="android:colorBackground">@color/poke_background</item>
+        <item name="android:windowBackground">@color/poke_background</item>
     </style>
 
     <style name="Theme.PokeApp" parent="Base.Theme.PokeApp" />
+
+    <!-- Cartão padrão do app -->
+    <style name="Widget.PokeApp.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/poke_card</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <!-- Campo de texto com contorno e cantos arredondados -->
+    <style name="Widget.PokeApp.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
 </resources>
