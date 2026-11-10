@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <string name="app_name">PokeApp</string>
-
-    <!-- Strings da implementação experimental. -->
     <string name="txt_fragment_a_name">Fragment A</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_busca_fragment">Hello busca fragment</string>
@@ -11,34 +8,24 @@
     <string name="hello_favoritos_fragment">Hello favoritos fragment</string>
     <string name="hello_detalhes_poke_fragment">Hello detalhes poke fragment</string>
 
-    <!-- Telas definitivas. -->
     <string name="titulo_busca">Buscar Pokémon</string>
     <string name="titulo_lista">Lista de Pokémon</string>
     <string name="titulo_favoritos">Meus favoritos</string>
     <string name="titulo_detalhes">Detalhes do Pokémon</string>
-
-    <!-- Busca. -->
     <string name="hint_nome_pokemon">Nome do Pokémon</string>
     <string name="botao_ver_detalhes">Ver detalhes</string>
     <string name="botao_lista">Lista de Pokémon</string>
     <string name="botao_favoritos">Favoritos</string>
     <string name="erro_nome_vazio">Informe o nome de um Pokémon</string>
-
-    <!-- Lista temporária. -->
     <string name="pokemon_pikachu">Pikachu</string>
     <string name="pokemon_charmander">Charmander</string>
-
-    <!-- Favoritos. -->
     <string name="favoritos_vazio">Nenhum Pokémon favorito por enquanto.</string>
-
-    <!-- Detalhes. -->
     <string name="detalhe_pokemon">Pokémon selecionado: %1$s</string>
-
-    <!-- Navegação. -->
     <string name="botao_voltar">Voltar</string>
-
     <string name="botao_carregar_mais">Carregar mais Pokémon</string>
     <string name="descricao_imagem_pokemon">Imagem do Pokémon</string>
+    <string name="descricao_imagem_pokemon_nome">Imagem do Pokémon %1$s</string>
     <string name="mensagem_carregando_lista">Carregando Pokémon...</string>
+    <string name="mensagem_carregando_detalhes">Carregando detalhes...</string>
     <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
 </resources>

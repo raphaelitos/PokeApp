@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="poke_ink">#263238</color>
+    <color name="poke_card">#F1F5F9</color>
 </resources>

@@ -8,41 +8,32 @@ import com.example.pokeapp.repository.api.PokemonRepository
 class ListaPokemonViewModel : ViewModel() {
 
     private val repository = PokemonRepository()
-
-    private val _estado = MutableLiveData(
-        EstadoListaPokemon()
-    )
-
+    private val _estado = MutableLiveData(EstadoListaPokemon())
     val estado: LiveData<EstadoListaPokemon> = _estado
 
     fun carregarProximaPagina() {
-        if (_estado.value?.carregando != true) {
-            if (!_estado.value?.possuiMais!!) {
-                return
-            }
+        val atual = _estado.value ?: EstadoListaPokemon()
+        if (atual.carregando || !atual.possuiMais) return
 
-            _estado.value = _estado.value?.copy(
-                carregando = true
-            )
+        val offsetSolicitado = atual.proximoOffset
+        _estado.value = atual.copy(carregando = true, erro = null)
 
-            repository.listarPokemons(
-                limit = 20,
-                offset = _estado.value?.proximoOffset ?: 0,
-            ) { pagina, erro ->
-                _estado.value = if (pagina != null) {
-                    _estado.value?.copy(
-                        itens = _estado.value?.itens.orEmpty() + pagina.results,
-                        carregando = false,
-                        erro = null,
-                        proximoOffset = _estado.value?.proximoOffset?.plus(20) ?: 0,
-                        possuiMais = _estado.value?.possuiMais!! && pagina.next != null)
-                }
-                else {
-                    _estado.value?.copy(
-                        carregando = false,
-                        erro = erro ?: "Erro desconhecido."
-                    )
-                }
+        repository.listarPokemons(limit = 20, offset = offsetSolicitado) { pagina, erro ->
+            val estadoAtual = _estado.value ?: atual
+
+            _estado.value = if (pagina != null) {
+                estadoAtual.copy(
+                    itens = estadoAtual.itens + pagina.results,
+                    carregando = false,
+                    erro = null,
+                    proximoOffset = offsetSolicitado + pagina.results.size,
+                    possuiMais = pagina.next != null && pagina.results.isNotEmpty()
+                )
+            } else {
+                estadoAtual.copy(
+                    carregando = false,
+                    erro = erro ?: "Falha ao carregar a lista."
+                )
             }
         }
     }

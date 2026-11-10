@@ -6,27 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.databinding.ItemPokemonBinding
 import com.example.pokeapp.repository.api.model.PokemonListItem
 
-class PokemonAdapter() : RecyclerView.Adapter<PokemonViewHolder>() {
+class PokemonAdapter(
+    private val onPokemonClick: (PokemonListItem) -> Unit
+) : RecyclerView.Adapter<PokemonViewHolder>() {
 
-    private var pokeList: List<PokemonListItem> = listOf()
+    private var pokemons: List<PokemonListItem> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        val item = ItemPokemonBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,false)
-        return PokemonViewHolder(item)
+        val binding = ItemPokemonBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return PokemonViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.bind(pokeList[position])
+        holder.bind(pokemons[position], onPokemonClick)
     }
 
-    override fun getItemCount(): Int {
-        return pokeList.count()
-    }
+    override fun getItemCount(): Int = pokemons.size
 
-    fun updatePokemonList(list: List<PokemonListItem>) {
-        pokeList = list
+    fun atualizarItens(novosItens: List<PokemonListItem>) {
+        pokemons = novosItens
         notifyDataSetChanged()
     }
 }
