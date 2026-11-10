@@ -2,29 +2,44 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:padding="12dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/titulo_lista"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center" />
 
-    <Button
-        android:id="@+id/btnPikachu"
+    <TextView
+        android:id="@+id/txtEstadoLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pokemon_pikachu" />
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:text="Carregando Pokémon..." />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPokemon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:padding="4dp"
+        tools:listitem="@layout/item_pokemon" />
 
     <Button
-        android:id="@+id/btnCharmander"
+        android:id="@+id/btnCarregarMais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pokemon_charmander" />
+        android:text="@string/botao_carregar_mais" />
 
     <Button
         android:id="@+id/btnVoltarLista"

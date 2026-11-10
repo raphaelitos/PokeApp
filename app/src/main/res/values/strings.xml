@@ -36,4 +36,9 @@
 
     <!-- Navegação. -->
     <string name="botao_voltar">Voltar</string>
+
+    <string name="botao_carregar_mais">Carregar mais Pokémon</string>
+    <string name="descricao_imagem_pokemon">Imagem do Pokémon</string>
+    <string name="mensagem_carregando_lista">Carregando Pokémon...</string>
+    <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
 </resources>
