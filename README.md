@@ -86,5 +86,4 @@ O projeto mantém os testes de exemplo gerados pela configuração inicial do An
 - **PokéAPI:** fonte pública dos dados dos Pokémon.
 - **PokeAPI/sprites:** imagens utilizadas na listagem e nos detalhes.
 - **Android Developers:** documentação de referência para os componentes AndroidX empregados.
-
-Projeto desenvolvido com finalidade didática, sem vínculo oficial com Pokémon, Nintendo, Game Freak ou The Pokémon Company.
+- **IA Generativa:** Claude para geração da interface e ChatGPT para acesso direto à documentação e planejamento do app
