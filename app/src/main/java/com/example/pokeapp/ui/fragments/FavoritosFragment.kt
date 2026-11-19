@@ -43,10 +43,24 @@ class FavoritosFragment : Fragment() {
 
         binding.recyclerFavoritos.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerFavoritos.adapter = adapter
+        binding.btnTentarNovamenteFavoritos.setOnClickListener {
+            viewModel.reiniciarObservacaoLista()
+        }
 
-        viewModel.favoritos.observe(viewLifecycleOwner) { favoritos ->
-            adapter.submitList(favoritos)
-            binding.layoutFavoritosVazio.isVisible = favoritos.isEmpty()
+        viewModel.estadoLista.observe(viewLifecycleOwner) { estado ->
+            adapter.submitList(estado.itens)
+            binding.progressFavoritos.isVisible = estado.carregando
+            binding.layoutErroFavoritos.isVisible = !estado.carregando &&
+                estado.erro != null && estado.itens.isEmpty()
+            binding.layoutFavoritosVazio.isVisible = !estado.carregando &&
+                estado.erro == null && estado.itens.isEmpty()
+            binding.recyclerFavoritos.isVisible = !estado.carregando && estado.itens.isNotEmpty()
+            if (estado.erro != null && estado.itens.isNotEmpty()) {
+                binding.txtAvisoFavoritos.text = estado.erro
+                binding.txtAvisoFavoritos.isVisible = true
+            } else {
+                binding.txtAvisoFavoritos.isVisible = false
+            }
         }
 
         viewModel.erro.observe(viewLifecycleOwner) { mensagem ->
@@ -55,9 +69,11 @@ class FavoritosFragment : Fragment() {
                 viewModel.limparErro()
             }
         }
+        viewModel.iniciarObservacaoLista()
     }
 
     override fun onDestroyView() {
+        viewModel.pararObservacaoLista()
         binding.recyclerFavoritos.adapter = null
         _binding = null
         super.onDestroyView()

@@ -93,4 +93,6 @@
     <string name="auth_erro_rede">Falha de conexão. Verifique a internet.</string>
     <string name="auth_erro_perfil">Conta criada, mas o perfil não foi salvo. Verifique a conexão e toque novamente em Cadastrar.</string>
     <string name="auth_erro_generico">Não foi possível concluir a operação.</string>
+    <string name="erro_carregar_favoritos">Não foi possível carregar os favoritos do Firebase. Verifique a conexão e tente novamente.</string>
+    <string name="erro_consultar_favorito">Não foi possível verificar se o Pokémon está nos favoritos.</string>
 </resources>

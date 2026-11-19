@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.navigation.safeargs)
-    alias(libs.plugins.legacy.kapt)
 
     id("com.google.gms.google-services")
 }
@@ -61,8 +60,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-    implementation("androidx.room:room-runtime:2.8.5")
-    kapt("androidx.room:room-compiler:2.8.5")
     implementation("androidx.core:core-splashscreen:1.2.0")
 
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))

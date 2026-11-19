@@ -20,6 +20,15 @@
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txtAvisoFavoritos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:textColor="?attr/colorError"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerFavoritos"
             android:layout_width="match_parent"
@@ -30,6 +39,39 @@
             android:paddingBottom="12dp"
             tools:itemCount="3"
             tools:listitem="@layout/item_favorito" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressFavoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/layoutErroFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="28dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/erro_carregar_favoritos"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorError" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTentarNovamenteFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/botao_tentar_novamente" />
     </LinearLayout>
 
     <!-- Estado vazio -->

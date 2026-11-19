@@ -34,6 +34,7 @@ class DetalhesPokemonFragment : Fragment() {
 
     private var idFavoritoObservado: Int? = null
     private var jaFavorito: Boolean = false
+    private var estadoFavoritoCarregado: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,9 +53,12 @@ class DetalhesPokemonFragment : Fragment() {
         favoritosViewModel.erro.observe(viewLifecycleOwner) { mensagem ->
             if (mensagem != null) {
                 Toast.makeText(requireContext(), mensagem, Toast.LENGTH_SHORT).show()
-                binding.btnFavorito.isEnabled = true
                 favoritosViewModel.limparErro()
             }
+        }
+
+        favoritosViewModel.operacaoEmAndamento.observe(viewLifecycleOwner) { carregando ->
+            binding.btnFavorito.isEnabled = estadoFavoritoCarregado && !carregando
         }
 
         viewModel.estado_retorno.observe(viewLifecycleOwner) { estado ->
@@ -155,9 +159,15 @@ class DetalhesPokemonFragment : Fragment() {
             binding.btnFavorito.isEnabled = false
             favoritosViewModel.observarFavorito(pokemon.id)
                 .observe(viewLifecycleOwner) { favorito ->
-                    jaFavorito = favorito
-                    atualizarBotaoFavorito(favorito)
-                    binding.btnFavorito.isEnabled = true
+                    if (favorito != null) {
+                        jaFavorito = favorito
+                        estadoFavoritoCarregado = true
+                        atualizarBotaoFavorito(favorito)
+                        binding.btnFavorito.isEnabled = favoritosViewModel.operacaoEmAndamento.value != true
+                    } else {
+                        estadoFavoritoCarregado = false
+                        binding.btnFavorito.isEnabled = false
+                    }
                 }
         }
         binding.btnFavorito.setOnClickListener {
@@ -176,7 +186,9 @@ class DetalhesPokemonFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        idFavoritoObservado?.let { favoritosViewModel.pararObservacaoFavorito(it) }
         idFavoritoObservado = null
+        estadoFavoritoCarregado = false
         _binding = null
         super.onDestroyView()
     }

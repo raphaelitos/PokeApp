@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.ItemFavoritoBinding
-import com.example.pokeapp.repository.local.PokemonFavorito
+import com.example.pokeapp.repository.favoritos.PokemonFavorito
 import com.example.pokeapp.ui.util.PokemonUi
 
 class FavoritosAdapter(
