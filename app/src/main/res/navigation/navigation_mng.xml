@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_mng"
-    app:startDestination="@id/buscaFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/buscaFragment"
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/cadastroFragment"
         android:name="com.example.pokeapp.ui.fragments.CadastroFragment"
-        android:label="fragment_cadastro"
+        android:label="@string/auth_titulo_cadastro"
         tools:layout="@layout/fragment_cadastro" >
         <action
             android:id="@+id/action_cadastroFragment_to_loginFragment"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.pokeapp.ui.fragments.LoginFragment"
-        android:label="fragment_login"
+        android:label="@string/auth_titulo_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_buscaFragment"
@@ -70,6 +70,15 @@
         <action
             android:id="@+id/action_loginFragment_to_cadastroFragment"
             app:destination="@id/cadastroFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_recuperarSenhaFragment"
+            app:destination="@id/recuperarSenhaFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/recuperarSenhaFragment"
+        android:name="com.example.pokeapp.ui.fragments.RecuperarSenhaFragment"
+        android:label="@string/auth_titulo_recuperacao"
+        tools:layout="@layout/fragment_recuperar_senha" />
 
 </navigation>

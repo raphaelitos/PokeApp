@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PokeApp</string>
-
-    <!-- Navegação -->
+    <!--  Navegação  -->
     <string name="nav_buscar">Buscar</string>
     <string name="nav_lista">Lista</string>
     <string name="nav_favoritos">Favoritos</string>
-
-    <!-- Busca -->
+    <!--  Busca  -->
     <string name="subtitulo_busca">Encontre qualquer Pokémon pelo nome ou número</string>
     <string name="hint_nome_pokemon">Nome ou número do Pokémon</string>
     <string name="botao_buscar">Buscar</string>
@@ -17,19 +14,16 @@
     <string name="pokemon_charmander">Charmander</string>
     <string name="pokemon_bulbasaur">Bulbasaur</string>
     <string name="descricao_logo">Logotipo do PokeApp</string>
-
-    <!-- Lista -->
+    <!--  Lista  -->
     <string name="titulo_lista">Lista de Pokémon</string>
     <string name="mensagem_lista_vazia">Nenhum Pokémon encontrado.</string>
     <string name="botao_tentar_novamente">Tentar novamente</string>
-
-    <!-- Favoritos -->
+    <!--  Favoritos  -->
     <string name="titulo_favoritos">Meus favoritos</string>
     <string name="favoritos_vazio">Nenhum Pokémon favorito por enquanto.</string>
     <string name="favoritos_vazio_dica">Toque no coração nos detalhes de um Pokémon para salvá-lo aqui.</string>
     <string name="erro_atualizar_favoritos">Não foi possível atualizar os favoritos.</string>
-
-    <!-- Detalhes -->
+    <!--  Detalhes  -->
     <string name="titulo_estatisticas">Estatísticas base</string>
     <string name="rotulo_altura">Altura</string>
     <string name="rotulo_peso">Peso</string>
@@ -38,12 +32,10 @@
     <string name="botao_voltar">Voltar</string>
     <string name="adicionar_favorito">Adicionar aos favoritos</string>
     <string name="remover_favorito">Remover dos favoritos</string>
-
-    <!-- Itens e imagens -->
+    <!--  Itens e imagens  -->
     <string name="numero_pokemon">#%1$03d</string>
     <string name="descricao_imagem_pokemon_nome">Imagem do Pokémon %1$s</string>
-
-    <!-- Tipos -->
+    <!--  Tipos  -->
     <string name="tipo_normal">Normal</string>
     <string name="tipo_fire">Fogo</string>
     <string name="tipo_water">Água</string>
@@ -62,14 +54,43 @@
     <string name="tipo_dark">Sombrio</string>
     <string name="tipo_steel">Aço</string>
     <string name="tipo_fairy">Fada</string>
-
-    <!-- Estatísticas -->
+    <!--  Estatísticas  -->
     <string name="stat_hp">PS</string>
     <string name="stat_attack">Ataque</string>
     <string name="stat_defense">Defesa</string>
     <string name="stat_special_attack">Atq. Esp.</string>
     <string name="stat_special_defense">Def. Esp.</string>
     <string name="stat_speed">Velocidade</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--  TODO: Remove or change this placeholder text  -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--  Autenticacao  -->
+    <string name="auth_titulo_login">Entre no PokeApp</string>
+    <string name="auth_titulo_cadastro">Crie sua conta</string>
+    <string name="auth_titulo_recuperacao">Recuperar senha</string>
+    <string name="auth_nome">Nome</string>
+    <string name="auth_nick">Nick</string>
+    <string name="auth_email">E-mail</string>
+    <string name="auth_senha">Senha</string>
+    <string name="auth_confirme_senha">Confirme a senha</string>
+    <string name="auth_entrar">Entrar</string>
+    <string name="auth_cadastrar">Cadastrar</string>
+    <string name="auth_sair">Sair</string>
+    <string name="auth_esqueci_senha">Esqueci minha senha</string>
+    <string name="auth_ir_cadastro">Não tem conta? Cadastre-se</string>
+    <string name="auth_voltar_login">Voltar ao login</string>
+    <string name="auth_instrucao_recuperacao">Informe seu e-mail para receber instruções de recuperação.</string>
+    <string name="auth_enviar_recuperacao">Enviar e-mail de recuperação</string>
+    <string name="auth_recuperacao_enviada">Se existir uma conta com este e-mail, você receberá instruções para recuperar a senha.</string>
+    <string name="auth_erro_nome_vazio">Informe seu nome.</string>
+    <string name="auth_erro_nick_vazio">Informe seu nick.</string>
+    <string name="auth_erro_email_invalido">Informe um e-mail válido.</string>
+    <string name="auth_erro_senha_vazia">Informe sua senha.</string>
+    <string name="auth_erro_senha_fraca">A senha deve ter pelo menos 6 caracteres.</string>
+    <string name="auth_erro_senhas_diferentes">As senhas não coincidem.</string>
+    <string name="auth_erro_email_existente">Este e-mail já está cadastrado.</string>
+    <string name="auth_erro_credenciais">E-mail ou senha inválidos.</string>
+    <string name="auth_erro_muitas_tentativas">Muitas tentativas. Tente novamente mais tarde.</string>
+    <string name="auth_erro_rede">Falha de conexão. Verifique a internet.</string>
+    <string name="auth_erro_perfil">Conta criada, mas o perfil não foi salvo. Verifique a conexão e toque novamente em Cadastrar.</string>
+    <string name="auth_erro_generico">Não foi possível concluir a operação.</string>
 </resources>

@@ -8,10 +8,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 import android.view.animation.AccelerateDecelerateInterpolator
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Mantém o conteúdo fora das barras do sistema (status, navegação e recorte de tela).
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { view, insets ->
             val barras = insets.getInsets(
                 WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
@@ -52,11 +53,32 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        // A barra inferior só aparece nas telas principais; os detalhes ocupam a tela toda.
+        binding.btnSair.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val opcoes = NavOptions.Builder()
+                .setPopUpTo(R.id.navigation_mng, false)
+                .setLaunchSingleTop(true)
+                .build()
+            navController.navigate(R.id.loginFragment, null, opcoes)
+        }
+
         navController.addOnDestinationChangedListener { _, destino, _ ->
-            val visivel = destino.id != R.id.detalhesPokemonFragment
-            binding.bottomNav.isVisible = visivel
-            binding.divisorNavegacao.isVisible = visivel
+            val telaPrincipal = destino.id == R.id.buscaFragment ||
+                    destino.id == R.id.listaPokemonFragment ||
+                    destino.id == R.id.favoritosFragment
+            val telaProtegida = telaPrincipal || destino.id == R.id.detalhesPokemonFragment
+
+            binding.bottomNav.isVisible = telaPrincipal
+            binding.divisorNavegacao.isVisible = telaPrincipal
+            binding.headerSessao.isVisible = telaPrincipal
+
+            if (telaProtegida && FirebaseAuth.getInstance().currentUser == null) {
+                val opcoes = NavOptions.Builder()
+                    .setPopUpTo(R.id.navigation_mng, false)
+                    .setLaunchSingleTop(true)
+                    .build()
+                navController.navigate(R.id.loginFragment, null, opcoes)
+            }
         }
     }
 }
