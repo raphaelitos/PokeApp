@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapp.R
 import com.example.pokeapp.databinding.FragmentFavoritosBinding
 import com.example.pokeapp.ui.adapter.FavoritosAdapter
+import com.example.pokeapp.ui.util.PokemonUi
+import com.example.pokeapp.ui.viewModel.AcaoFavorito
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.example.pokeapp.ui.viewModel.FavoritosViewModel
 
 class FavoritosFragment : Fragment() {
@@ -38,7 +41,19 @@ class FavoritosFragment : Fragment() {
                 val args = Bundle().apply { putString("pokemonKey", favorito.name) }
                 findNavController().navigate(R.id.detalhesPokemonFragment, args)
             },
-            onRemover = { favorito -> viewModel.removerFavorito(favorito.id) }
+            onRemover = { favorito ->
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.dialogo_remover_titulo)
+                    .setMessage(getString(
+                        R.string.dialogo_remover_mensagem,
+                        PokemonUi.formatarNome(favorito.name)
+                    ))
+                    .setNegativeButton(R.string.dialogo_cancelar, null)
+                    .setPositiveButton(R.string.dialogo_remover) { _, _ ->
+                        viewModel.removerFavorito(favorito.id)
+                    }
+                    .show()
+            }
         )
 
         binding.recyclerFavoritos.layoutManager = LinearLayoutManager(requireContext())
@@ -65,8 +80,19 @@ class FavoritosFragment : Fragment() {
 
         viewModel.erro.observe(viewLifecycleOwner) { mensagem ->
             if (mensagem != null) {
-                Toast.makeText(requireContext(), mensagem, Toast.LENGTH_SHORT).show()
                 viewModel.limparErro()
+                Snackbar.make(binding.root, mensagem, Snackbar.LENGTH_LONG).show()
+            }
+        }
+
+        viewModel.acaoConcluida.observe(viewLifecycleOwner) { acao ->
+            if (acao != null) {
+                viewModel.consumirAcaoConcluida()
+                val mensagem = when (acao) {
+                    AcaoFavorito.ADICIONADO -> R.string.snackbar_favorito_adicionado
+                    AcaoFavorito.REMOVIDO -> R.string.snackbar_favorito_removido
+                }
+                Snackbar.make(binding.root, mensagem, Snackbar.LENGTH_SHORT).show()
             }
         }
         viewModel.iniciarObservacaoLista()

@@ -95,4 +95,10 @@
     <string name="auth_erro_generico">Não foi possível concluir a operação.</string>
     <string name="erro_carregar_favoritos">Não foi possível carregar os favoritos do Firebase. Verifique a conexão e tente novamente.</string>
     <string name="erro_consultar_favorito">Não foi possível verificar se o Pokémon está nos favoritos.</string>
+    <string name="snackbar_favorito_adicionado">Pokémon adicionado aos favoritos.</string>
+    <string name="snackbar_favorito_removido">Pokémon removido dos favoritos.</string>
+    <string name="dialogo_remover_titulo">Alerta de Remoção</string>
+    <string name="dialogo_remover_mensagem">Deseja mesmo remover %1$s dos seus favoritos?</string>
+    <string name="dialogo_cancelar">Cancelar</string>
+    <string name="dialogo_remover">Remover</string>
 </resources>

@@ -11,6 +11,8 @@ import com.example.pokeapp.repository.favoritos.PokemonFavoritosRepository
 import com.google.firebase.firestore.ListenerRegistration
 import java.util.Locale
 
+enum class AcaoFavorito { ADICIONADO, REMOVIDO }
+
 class FavoritosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = PokemonFavoritosRepository()
@@ -27,6 +29,9 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val _erro = MutableLiveData<String?>(null)
     val erro: LiveData<String?> = _erro
+
+    private val _acaoConcluida = MutableLiveData<AcaoFavorito?>(null)
+    val acaoConcluida: LiveData<AcaoFavorito?> = _acaoConcluida
 
     fun iniciarObservacaoLista() {
         if (registroLista != null) return
@@ -74,9 +79,12 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
     fun alternarFavorito(pokemon: PokemonEntity, jaFavorito: Boolean) {
         if (_operacaoEmAndamento.value == true) return
         _operacaoEmAndamento.value = true
+        val acao = if (jaFavorito) AcaoFavorito.REMOVIDO else AcaoFavorito.ADICIONADO
         val retorno: (Result<Unit>) -> Unit = { resultado ->
             _operacaoEmAndamento.value = false
-            resultado.exceptionOrNull()?.let {
+            if (resultado.isSuccess) {
+                _acaoConcluida.value = acao
+            } else {
                 _erro.value = getApplication<Application>().getString(R.string.erro_atualizar_favoritos)
             }
         }
@@ -95,7 +103,9 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
         _operacaoEmAndamento.value = true
         repository.remover(id) { resultado ->
             _operacaoEmAndamento.value = false
-            resultado.exceptionOrNull()?.let {
+            if (resultado.isSuccess) {
+                _acaoConcluida.value = AcaoFavorito.REMOVIDO
+            } else {
                 _erro.value = getApplication<Application>().getString(R.string.erro_atualizar_favoritos)
             }
         }
@@ -103,6 +113,10 @@ class FavoritosViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun limparErro() {
         _erro.value = null
+    }
+
+    fun consumirAcaoConcluida() {
+        _acaoConcluida.value = null
     }
 
     override fun onCleared() {

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,6 +20,8 @@ import com.example.pokeapp.ui.util.PokemonUi
 import com.example.pokeapp.ui.viewModel.DetalhesPokemonViewModel
 import com.example.pokeapp.ui.viewModel.EstadoRetornoDetalhes
 import com.example.pokeapp.ui.viewModel.FavoritosViewModel
+import com.example.pokeapp.ui.viewModel.AcaoFavorito
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.chip.Chip
 import kotlin.math.min
 
@@ -52,8 +53,19 @@ class DetalhesPokemonFragment : Fragment() {
 
         favoritosViewModel.erro.observe(viewLifecycleOwner) { mensagem ->
             if (mensagem != null) {
-                Toast.makeText(requireContext(), mensagem, Toast.LENGTH_SHORT).show()
                 favoritosViewModel.limparErro()
+                Snackbar.make(binding.root, mensagem, Snackbar.LENGTH_LONG).show()
+            }
+        }
+
+        favoritosViewModel.acaoConcluida.observe(viewLifecycleOwner) { acao ->
+            if (acao != null) {
+                favoritosViewModel.consumirAcaoConcluida()
+                val mensagem = when (acao) {
+                    AcaoFavorito.ADICIONADO -> R.string.snackbar_favorito_adicionado
+                    AcaoFavorito.REMOVIDO -> R.string.snackbar_favorito_removido
+                }
+                Snackbar.make(binding.root, mensagem, Snackbar.LENGTH_SHORT).show()
             }
         }
 
