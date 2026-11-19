@@ -50,5 +50,26 @@
             android:id="@+id/action_favoritosFragment_to_buscaFragment"
             app:destination="@id/buscaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="com.example.pokeapp.ui.fragments.CadastroFragment"
+        android:label="fragment_cadastro"
+        tools:layout="@layout/fragment_cadastro" >
+        <action
+            android:id="@+id/action_cadastroFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.pokeapp.ui.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_buscaFragment"
+            app:destination="@id/buscaFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+    </fragment>
 
 </navigation>

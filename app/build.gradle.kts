@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.legacy.kapt)
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -62,5 +64,11 @@ dependencies {
     implementation("androidx.room:room-runtime:2.8.5")
     kapt("androidx.room:room-compiler:2.8.5")
     implementation("androidx.core:core-splashscreen:1.2.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:35.2.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
 
 }

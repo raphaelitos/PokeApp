@@ -39,4 +39,8 @@
     <color name="poke_type_dark">#5A4A40</color>
     <color name="poke_type_steel">#7A7A9A</color>
     <color name="poke_type_fairy">#CF6FA0</color>
+
+    <color name="purple_500">#6F35FC</color>
+    <color name="purple_200">#8A5DF8</color>
+
 </resources>

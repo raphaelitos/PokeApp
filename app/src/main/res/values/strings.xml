@@ -70,4 +70,6 @@
     <string name="stat_special_attack">Atq. Esp.</string>
     <string name="stat_special_defense">Def. Esp.</string>
     <string name="stat_speed">Velocidade</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
